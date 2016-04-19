@@ -5,7 +5,6 @@ import {Component, ViewEncapsulation} from 'angular2/core';
 import {RouteConfig, Router} from 'angular2/router';
 
 import {Home} from './home';
-import {AppState} from './app.service';
 import {RouterActive} from './router-active';
 
 /*
@@ -14,9 +13,9 @@ import {RouterActive} from './router-active';
  */
 @Component({
   selector: 'app',
-  pipes: [ ],
-  providers: [ ],
-  directives: [ RouterActive ],
+  pipes: [],
+  providers: [],
+  directives: [RouterActive],
   encapsulation: ViewEncapsulation.None,
   styles: [`
     body {
@@ -62,8 +61,6 @@ import {RouterActive} from './router-active';
       <router-outlet></router-outlet>
     </main>
 
-    <pre>this.appState.state = {{ appState.state | json }}</pre>
-
     <footer>
       WebPack Angular 2 Starter by <a [href]="url">@AngularClass</a>
       <div>
@@ -73,8 +70,8 @@ import {RouterActive} from './router-active';
   `
 })
 @RouteConfig([
-  { path: '/',      name: 'Index', component: Home, useAsDefault: true },
-  { path: '/home',  name: 'Home',  component: Home },
+  { path: '/', name: 'Index', component: Home, useAsDefault: true },
+  { path: '/home', name: 'Home', component: Home },
   // Async load a component using Webpack's require with es6-promise-loader and webpack `require`
   { path: '/about', name: 'About', loader: () => require('es6-promise!./about')('About') }
 ])
@@ -83,10 +80,10 @@ export class App {
   name = 'Angular 2 Webpack Starter';
   url = 'https://twitter.com/AngularClass';
 
-  constructor(public appState: AppState) {}
+  constructor() { }
 
   ngOnInit() {
-    console.log('Initial App State', this.appState.state);
+    
   }
 
 }
