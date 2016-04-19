@@ -1,5 +1,6 @@
 var koa = require('koa')
-    ,session = require('koa-session')
+    ,session = require('koa-generic-session')
+    ,redisStore = require('koa-redis')
     ,mount = require('koa-mount')
     ,serve = require('koa-static')
     ,accesslog = require('koa-accesslog')
@@ -19,9 +20,13 @@ var app = koa();
 routes(router);
 
 app.use(accesslog());
-app.keys = ['grant'];
+app.keys = ['grant','keys', 'keykeys'];
 app.use(serve(distPath));
-app.use(session(app));
+app.use(session({
+    store: redisStore({
+    // Options specified here
+  })
+}));
 app.use(mount(grant));
 app.use(router.routes());
 koaqs(app);

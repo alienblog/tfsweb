@@ -3,9 +3,11 @@
  */
 import {Component, ViewEncapsulation} from 'angular2/core';
 import {RouteConfig, Router} from 'angular2/router';
+import {HTTP_PROVIDERS} from 'angular2/http';
 
 import {Home} from './home';
 import {RouterActive} from './router-active';
+import {TFSService} from './app.service';
 
 /*
  * App Component
@@ -14,7 +16,10 @@ import {RouterActive} from './router-active';
 @Component({
   selector: 'app',
   pipes: [],
-  providers: [],
+  providers: [
+    HTTP_PROVIDERS,
+    TFSService
+  ],
   directives: [RouterActive],
   encapsulation: ViewEncapsulation.None,
   styles: [`
@@ -80,10 +85,10 @@ export class App {
   name = 'Angular 2 Webpack Starter';
   url = 'https://twitter.com/AngularClass';
 
-  constructor() { }
+  constructor(public tfsService: TFSService) { }
 
   ngOnInit() {
-    
+    this.tfsService.app.getAuth();
   }
 
 }

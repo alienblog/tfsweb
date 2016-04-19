@@ -42,10 +42,14 @@ export class Home {
   }
 
   submitState(value) {
-    this.tfsService.User.getProfile((err,result)=>{
-      this.tfsService.User.getMemberAccounts((error,result)=>{
-        if(!error){
-          console.log(result.value);
+    this.tfsService.user.getProfile((err, result) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      this.tfsService.user.getMemberAccounts((error, res) => {
+        if (!error) {
+          console.log(res.value);
         }
       });
     });

@@ -34,3 +34,8 @@ export interface Account {
     properties: any[];
     lastUpdatedDate: Date;
 }
+
+export interface Result<T> {
+    data: T;
+    error: any;
+}
